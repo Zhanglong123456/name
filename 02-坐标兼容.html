@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 2000px;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <img id="im" src="./bird.png" alt="">
+  <script type="text/javascript">
+    function my$(id) {
+      return document.getElementById(id)
+    }
+    // 图片跟着鼠标飞
+    document.onmousemove = function (e) {
+      e = window.event || e
+      // my$('im').style.left = e.clientX + 'px'
+      // my$('im').style.top = e.clientY + 'px'
+      my$('im').style.left = evtObj.getPageX(e) + 'px'
+      my$('im').style.top = evtObj.getPageY(e) + 'px'
+
+      // IE8不支持pageX和pageY,, 谷歌和火狐支持
+    }
+
+
+    var evtObj = {
+      // 事件参数对象的兼容问题
+      getEvt: function (e) {
+        return window.event || e
+      },
+      // 兼容可视区域的横坐标
+      getClientX: function (e) {
+        return this.getEvt(e).clientX
+      },
+      // 兼容可视区域的纵坐标
+      getClientY: function (e) {
+        return this.getEvt(e).clientY
+      },
+      // 兼容卷曲出去的横向的距离
+      getScrollLeft: function () {
+        return window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft || 0
+      },
+      // 兼容卷曲出去的纵向的距离
+      getScrollTop: function () {
+        return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop || 0
+      },
+      // 兼容pageX的代码
+      getPageX: function (e) {
+        return this.getEvt(e).pageX ? this.getEvt(e).pageX : this.getClientX(e) + this.getScrollLeft()
+      },
+      // 兼容pageY的代码
+      getPageY: function (e) {
+        return this.getEvt(e).pageY ? this.getEvt(e).pageY : this.getClientY(e) + this.getScrollTop()
+      }
+    }
+  </script>
+</body>
+
+</html>

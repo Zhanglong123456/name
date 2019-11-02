@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+
+</head>
+
+<body>
+  <button id="btn">按钮</button>
+  <script type="text/javascript">
+    // 注册事件
+    // document.getElementById('btn').onclick = function () {
+    //   console.log('志远好帅哦')
+    // }
+    // document.getElementById('btn').onclick = function () {
+    //   console.log('小杨更帅')
+    // }
+    function my$(id) {
+      return document.getElementById(id)
+    }
+    // my$('btn').addEventListener('click', function () { 
+    //   console.log('1')
+    // }, false)
+
+    // my$('btn').addEventListener('click', function () { 
+    //   console.log('2')
+    // }, false)
+
+    // 为元素绑定事件的兼容代码: 元素,事件类型,事件的回调函数
+    function addEventListener(element, eventName, fn) {
+      // 判断浏览器是否支持addEventListener
+      if (element.addEventListener) {
+        element.addEventListener(eventName, fn, false)
+      } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, fn)
+      } else {
+        element['on' + eventName] = fn
+      }
+    }
+    function removeEventListener(element, eventName, fn) {
+      // 判断浏览器是否支持addEventListener
+      if (element.removeEventListener) {
+        element.removeEventListener(eventName, fn, false)
+      } else if (element.detachEvent) {
+        element.detachEvent('on' + eventName, fn)
+      } else {
+        element['on' + eventName] = null
+      }
+    }
+
+
+    function f1() {
+      console.log('1')
+    }
+    function f2() {
+      console.log('2')
+    }
+    addEventListener(my$('btn'), 'click', f1)
+    addEventListener(my$('btn'), 'click', f2)
+
+    removeEventListener(my$('btn'),'click',f1)
+
+    // my$('btn').attachEvent('onclick',function(){
+    //   console.log('哈哈')
+    // })
+
+
+
+    // var obj={
+    //   name:function(){
+    //     console.log('哈哈')
+    //   }
+    // }
+    // if(obj.name){
+    //   obj.name()
+    // }
+
+  </script>
+</body>
+
+</html>
